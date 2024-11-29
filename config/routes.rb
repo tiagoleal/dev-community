@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+  get 'member/:id', to: 'members#show', as: 'member'
 end

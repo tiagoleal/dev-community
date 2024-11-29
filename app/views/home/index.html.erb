@@ -1,4 +1,4 @@
-<div class="col-lg-10 mx-auto mt-5">
+<div class="col-lg-8 mx-auto mt-5">
 
     <div class="card mt-4 mb-4">
         <div class="card-body">
@@ -27,7 +27,7 @@
                             <p class="lead"> <%= user.profile_title %></p>
                             <small class="text-primary"><%= user.country %></small><br >
 
-                            <%= link_to "View profile", "javascript:void(0)", class: "btn btn-primary mt-3" %>
+                            <%= link_to "View profile", member_path(user), class: "btn btn-primary mt-3" %>
                         </div>
                     </div>
                 </div>
