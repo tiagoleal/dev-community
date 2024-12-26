@@ -1,2 +1,2 @@
-module MemberHelper
+module MembersHelper
 end

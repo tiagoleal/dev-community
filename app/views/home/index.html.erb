@@ -22,9 +22,9 @@
                 <div class="card text-center shadow" style="min-height: 400px">
                     <div class="card-body">
                         <%= image_tag "user.jpg", style: "width: 150px; border-radius: 50%; border: 2px solid #0d6efd;", class: 'mb-3' %>
-                        <div class="user-info">
-                            <h5><%= user.name %></h5>
-                            <p class="lead"> <%= user.profile_title %></p>
+                        <div class="user-info" data-controller="user-name">
+                            <h5 data-user-name-target="name" data-action="click->user-name#getUserName"><%= user.name %></h5>
+                            <p class="lead" data-user-name-target="profile" data-action="click->user-name#getProfile"><%= user.profile_title %></p>
                             <small class="text-primary"><%= user.country %></small><br >
 
                             <%= link_to "View profile", member_path(user), class: "btn btn-primary mt-3" %>

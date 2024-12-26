@@ -1,0 +1,21 @@
+<div class="card mb-5" id="member-personal-details">
+  <div class="row">
+    <div class="col-lg-4">
+        <%= image_tag "user.jpeg", class: "img-fluid" %>
+    </div>
+    <div class="col-lg-8">
+      <div class="card-body">   
+        <h3 class="fw-bold"><%= user.name %></h3> 
+        <p class="lead"><%= user.profile_title %></p>
+        <p class="lead text-primary"><%= user.address %></p>
+
+         <% if user_signed_in? && user == current_user %>
+            <%= link_to edit_member_personal_details_path(user), class: "edit-profile", data: { controller: "bs-modal-form" } do %>
+              <button type="button" class="btn btn-primary">Edit Details</button>
+            <% end %>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
