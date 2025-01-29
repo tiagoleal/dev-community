@@ -50,6 +50,12 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  #DEBUG
+  gem 'debase'
+  gem 'ruby-debug-ide'
+  gem 'solargraph-rails'
+  gem 'benchmark-ips'
 end
 
 group :development do
