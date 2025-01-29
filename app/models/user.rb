@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  has_many :work_experiences
+
   PROFILE_TITLE = [
     'Senior Ruby on Rails Developer',
     'Full Stack Ruby on Rails Developer',

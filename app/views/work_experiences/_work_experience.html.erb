@@ -1,0 +1,26 @@
+<li class="list-group-item" id="work_experience_item_<%= work_experience.id %>">
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="d-flex justify-content-start">
+        <h5><%= work_experience.job_title %></h5>
+      </div>  
+    </div>
+    <div class="col-lg-3">
+      <div class="d-flex justify-content-end">
+        <%= link_to edit_work_experience_path(work_experience), data: { controller: "bs-modal-form" } do %>
+          <i class="bi bi-pencil-fill"></i>
+        <% end %>
+
+        <%= link_to work_experience_path(work_experience), data: { turbo_method: :delete,
+          turbo_confirm: "Are you sure?" } do %>
+          <i class="bi bi-trash-fill"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <p><%= work_experience.company %></p>
+      <p><%= work_experience.employment_type %></p>
+      <p><%= work_experience.location %></p>
+    </div>
+  </div>
+</li>

@@ -23,4 +23,41 @@
       <%= render 'member_description', user: @user %>
     </div>
   </div>
+
+   <div class="card mb-5">
+      <div class="card-body">
+        <% if @user == current_user %>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="d-flex justify-content-start">
+                <h3>Work Experience</h3>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="d-flex justify-content-start">
+                <%= link_to new_work_experience_path, data: { controller: "bs-modal-form" } do %>
+                  <button type="button" class="btn btn-primary">Add Experience</button>
+                <% end %>
+              </div>
+            </div>
+            <% if @user.work_experiences.present? %>
+              <div class="col-lg-4">
+                <div class="d-flex justify-content-start">
+                  <%= link_to "javascript:void(0)" do %><button type="button" class="btn btn-primary">Edit Experience</button>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if@user.work_experiences.present? %>
+          <ul class= "list-group" id="work_experience_items">
+            <% @user.work_experiences.each do |work_experience|%>
+              <%= render 'work_experiences/work_experience', work_experience: work_experience %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
 </div>
