@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   get 'edit_personal_details/:id', to: 'members#edit_personal_details', as: 'edit_member_personal_details'
   get 'edit_profile_details/:id', to: 'members#edit_profile_details', as: 'edit_member_profile_details'
   patch 'update_personal_details/:id', to: 'members#update_personal_details', as: 'update_member_personal_details'  
+
+  resources :work_experiences
 end
