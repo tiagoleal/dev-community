@@ -1,20 +1,51 @@
 <div class="card mb-5" id="member-personal-details">
   <div class="row">
     <div class="col-lg-4">
-        <%= image_tag "user.jpeg", class: "img-fluid" %>
+      <%= image_tag "user.jpeg" , class: "img-fluid" %>
     </div>
     <div class="col-lg-8">
-      <div class="card-body">   
-        <h3 class="fw-bold"><%= user.name %></h3> 
-        <p class="lead"><%= user.profile_title %></p>
-        <p class="lead text-primary"><%= user.address %></p>
+      <div class="card-body">
+        <h3 class="fw-bold">
+          <%= user.name %>
+        </h3>
+        <p class="lead">
+          <%= user.profile_title %>
+        </p>
+        <p class="lead text-primary">
+          <%= user.address %>
+        </p>
 
-         <% if user_signed_in? && user == current_user %>
-            <%= link_to edit_member_personal_details_path(user), class: "edit-profile", data: { controller: "bs-modal-form" } do %>
-              <button type="button" class="btn btn-primary">Edit Details</button>
-            <% end %>
+        <% if user_signed_in? && user==current_user %>
+          <%= link_to edit_member_personal_details_path(user), class: "edit-profile" , data: { controller: "bs-modal-form" } do %>
+            <button type="button" class="btn btn-primary">Edit Details</button>
           <% end %>
+        <% end %>
 
+        <div id="user-connection-status">
+          <% if current_user.check_if_already_connected?(user) %>
+            <%= link_to "Connect" , connections_path, class: "btn btn-primary" , data: { controller: "connections" , turbo_method: :post, connections_target: "connection" , requester_id: current_user.id, connected_id: user.id } %>
+          <% elsif get_connection_status(user) == 'pending' %>
+            <%= render "connections/create", connector: user %>
+          <% elsif get_connection_status(user) =='accepted'%>
+            <button type="button" class="btn btn-success">Connected</button>
+          <% elsif get_connection_status(user) =='rejected'%>
+            <button type="button" class="btn btn-danger">Rejected</button>
+          <% end %>
+        </div>
+
+        <% if @connections.present? %>
+          <div class="connection-count">
+            <%= link_to pluralize(@connections.count, 'connection'), member_connections_path(user) %>
+          </div>
+        <% end %>
+
+        <% if current_user != @user %>
+          <div class="mutual-connection-count">
+            <%= link_to pluralize(@mutual_connections.count, 'mutual connection' ), member_connections_path(user, mutual_connections: true) %>
+          </div>
+        <% end %>
+
+        
       </div>
     </div>
   </div>
