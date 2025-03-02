@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  before_action :authenticate_user!, only: %i[edit_description edit_personal_details update_description update_personal_details]
+  # before_action :authenticate_user!, only: %i[edit_description edit_personal_details update_description update_personal_details]
   before_action :set_user,
                 only: %i[show edit_description edit_personal_details update_description update_personal_details]
 
@@ -19,10 +19,11 @@ class MembersController < ApplicationController
     respond_to do |format|
       if current_user.update(about: params[:user][:about])
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
+          render_turbo_stream(
+            "replace",
             "member-description",
-            partial: "members/member_description",
-            locals: { user: current_user }
+            "members/member_description",
+            { user: current_user }
           )
         end
       end
@@ -33,10 +34,11 @@ class MembersController < ApplicationController
     respond_to do |format|
       if current_user.update(user_personal_info_params)
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
+          render_turbo_stream(
+            "replace",
             "member-personal-details",
-            partial: "members/member_personal_details",
-            locals: { user: current_user }
+            "members/member_personal_details",
+            { user: current_user }
           )
         end
       end
@@ -45,11 +47,12 @@ class MembersController < ApplicationController
 
   def connections
     @user = User.find(params[:id])
-    @connected_users = if params[:mutual_connections].present?
+    total_users = if params[:mutual_connections].present?
                         User.where(id: current_user.mutually_connected_ids(@user))
     else
                         User.where(id: @user.connected_user_ids)
     end
+    @connected_users = total_users.page(params[:page]).per(10)
     @total_connections = @connected_users.count
   end
 

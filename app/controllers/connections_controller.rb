@@ -1,5 +1,5 @@
 class ConnectionsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @requested_connections = Connection.includes(:requested).where(user_id: current_user.id)
@@ -25,6 +25,7 @@ class ConnectionsController < ApplicationController
             receiver = @connection.received
             receiver.connected_user_ids << @connection.requested.id
             receiver.save
+
             requester = @connection.requested
             requester.connected_user_ids << @connection.received.id
             requester.save
