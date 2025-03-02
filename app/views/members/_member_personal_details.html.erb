@@ -15,7 +15,7 @@
           <%= user.address %>
         </p>
 
-        <% if user_signed_in? && user==current_user %>
+        <% if user == current_user %>
           <%= link_to edit_member_personal_details_path(user), class: "edit-profile" , data: { controller: "bs-modal-form" } do %>
             <button type="button" class="btn btn-primary">Edit Details</button>
           <% end %>
@@ -39,13 +39,11 @@
           </div>
         <% end %>
 
-        <% if current_user != @user %>
+        <% if current_user != @user && @mutual_connections.present? && @mutual_connections.count > 0 %>
           <div class="mutual-connection-count">
             <%= link_to pluralize(@mutual_connections.count, 'mutual connection' ), member_connections_path(user, mutual_connections: true) %>
           </div>
         <% end %>
-
-        
       </div>
     </div>
   </div>

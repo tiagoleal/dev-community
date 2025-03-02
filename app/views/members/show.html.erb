@@ -51,7 +51,7 @@
           </div>
         <% end %>
 
-        <% if@user.work_experiences.present? %>
+        <% if @user.work_experiences.present? %>
           <ul class= "list-group" id="work_experience_items">
             <% @user.work_experiences.each do |work_experience|%>
               <%= render 'work_experiences/work_experience', work_experience: work_experience %>
