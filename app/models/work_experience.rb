@@ -1,12 +1,12 @@
 class WorkExperience < ApplicationRecord
   belongs_to :user
 
-  EMPLOYMENT_TYPE = ['Full-type', 'Part-time', 'Part-time', 'Self-employeed', 'Internship', 'Freelance', 'Trainee']
-  LOCATION_TYPE = ['Remote', 'On-site', 'Hybrid']
+  EMPLOYMENT_TYPE = [ "Full-time", "Part-time", "Part-time", "Self-employeed", "Internship", "Freelance", "Trainee" ]
+  LOCATION_TYPE = [ "Remote", "On-site", "Hybrid" ]
 
   validates :company, :start_date, :job_title, :location, presence: true
-  validates :employment_type, presence:true, inclusion: { in: EMPLOYMENT_TYPE, message: "not a valid employment type" }
-  validates :location_type, presence:true, inclusion: { in: LOCATION_TYPE, message: "not a valid location type" }
+  validates :employment_type, presence: true, inclusion: { in: EMPLOYMENT_TYPE, message: "not a valid employment type" }
+  validates :location_type, presence: true, inclusion: { in: LOCATION_TYPE, message: "not a valid location type" }
 
   validate :work_experience_last_date
   validate :presence_of_end_date
@@ -44,12 +44,12 @@ class WorkExperience < ApplicationRecord
     "#{location} (#{location_type})".strip
   end
 
-  def job_duration 
+  def job_duration
     months = if end_date.present?
                 ((end_date.year - start_date.year) * 12 + end_date.month - start_date.month - end_date.day >= start_date.day ? 0 : 1).round
-             else
+    else
                 (Date.today.year - start_date.year) * 12 + Date.today.month - start_date.month - (Date.today.day >= start_date.day ? 0 : 1).round
-             end
+    end
 
     result = months.divmod(12)
 
@@ -61,5 +61,4 @@ class WorkExperience < ApplicationRecord
       "#{start_date.strftime('%b %Y')} - #{end_date.strftime('%b %Y')} (#{duration})"
     end
   end
-
 end

@@ -57,6 +57,8 @@ group :development, :test do
   gem "solargraph-rails"
   gem "benchmark-ips"
   gem "letter_opener"
+  gem "factory_bot_rails"
+  gem "rspec-rails", "~> 6.0.0"
 end
 
 group :development do

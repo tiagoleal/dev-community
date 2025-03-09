@@ -17,7 +17,7 @@
 
         <% if user == current_user %>
           <%= link_to edit_member_personal_details_path(user), class: "edit-profile" , data: { controller: "bs-modal-form" } do %>
-            <button type="button" class="btn btn-primary">Edit Details</button>
+            <i class="bi bi-pencil-fill"></i>
           <% end %>
         <% end %>
 
