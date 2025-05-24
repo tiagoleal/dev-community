@@ -25,7 +25,7 @@ class WorkExperience < ApplicationRecord
   end
 
   def currently_not_working_here?
-    !currently_working_here
+    currently_working_here
   end
 
   def end_date_greater_than_start_date

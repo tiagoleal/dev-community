@@ -18,6 +18,9 @@ DevCommunity is a **Rails 7** application that enables developers to create and 
 - **Authentication:** Devise
 - **Testing:** RSpec, Capybara, Selenium
 
+## 🖼️ Screenshot
+![](https://github.com/tiagoleal/dev-community/tree/master/public/dev-community.gif)
+
 ## 📦 Installation
 
 1. Clone the repository:
